@@ -2,6 +2,12 @@
 Cython Changelog
 ================
 
+Latest changes
+==============
+
+* Support operator bool() for C++ classes so they can be used in if statements.
+
+
 0.22.1 (2015-06-20)
 ===================
 
