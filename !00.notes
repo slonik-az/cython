@@ -1,0 +1,24 @@
+#|> <!LR> notes on Cython development
+
+##***|> Installing Cython
+## ++|> Building inplace
+* To build Cython inplace:
+  > ./setup.py -v build_ext -i -f |& tee setup_build_ext.log
+  -i - inplace
+  -f - rebuild everything regardless timestamps
+
+* Use cython-dev
+  I put together a modified cython launcher called cython-dev. It sets up sys.path and environment
+  PATH for an inplace operation. Just symlink it from some convenient place:
+  > ln -s $PWD/bin/cython-dev  ~/bin/
+
+
+################################################################################
+##~~~|> EMACS customization section.
+## LOCAL VARIABLES:
+## mode:        Text
+## coding:      utf-8
+## default-input-method: cyrillic-translit
+## fill-column: 100
+## tab-width:   4
+## END:

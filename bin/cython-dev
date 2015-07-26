@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+'''
+<!LR> Development version of Cython -- Main Program, Unix.
+'''
+#
+#   Cython -- Main Program, Unix.
+#
+
+_LR_DBG_print_flag_= True and False # Flag: Print settings or run
+
+def _00_():
+    "Setup sys.path and PATH environment var for in-place use."
+    P= _LR_DBG_print_flag_ # Flag: Print settings or not
+    import sys, os
+    from os.path import dirname, join, realpath, normpath
+    if  P: from pprint import pprint
+
+    def dedup(plst):
+        "Remove duplicates from the path list"
+        res = []
+        seen= set()
+        for path in plst:
+            #if  path: path=realpath(path)
+            if  path in seen:
+                continue
+            else:
+                seen.add(  path)
+                res.append(path)
+        return res
+
+    prj_dir= normpath(join(dirname(realpath(__file__)),'..'))
+    if  P: 
+        print 'prj_dir =', prj_dir
+        print 'sys.path (OLD) = ',;  pprint( sys.path)
+    sys.path.insert(1, prj_dir)
+    sys.path[:]= dedup(sys.path)
+    if  P: print 'sys.path (NEW) = ',;  pprint( sys.path)
+    env_PATH= os.environ['PATH']
+    env_PATH= ':'.join(dedup([join(prj_dir,'bin')]+env_PATH.split(':')))
+    if  P: print 'PATH (OLD) =', os.environ['PATH']
+    os.environ['PATH']= env_PATH
+    if  P: print 'PATH (NEW) =', os.environ['PATH']
+  
+_00_(); del _00_
+
+if  not _LR_DBG_print_flag_: # either run or print settings
+    from Cython.Compiler.Main import main
+    main(command_line = 1)
